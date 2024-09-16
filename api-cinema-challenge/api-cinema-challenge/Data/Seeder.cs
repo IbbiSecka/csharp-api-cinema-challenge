@@ -39,7 +39,7 @@ namespace api_cinema_challenge.Data
                         );
                         await db.SaveChangesAsync();
                     }
-
+                    
                     // Tickets
                     if (!db.Tickets.Any())
                     {
