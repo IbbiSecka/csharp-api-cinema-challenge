@@ -1,67 +1,94 @@
-﻿using api_cinema_challenge.Models;
+﻿using api_cinema_challenge.Data;
+using api_cinema_challenge.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace api_cinema_challenge.Repository
 {
     public class Repository : IRepository
     {
-        public Task CreateCustomer(Customer customer)
+      private CinemaContext _context;
+
+        public async Task<Customer> CreateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(customer);
+            return customer;
+
         }
 
-        public Task CreateMovie(Movie movie)
+        public async Task<Movie> CreateMovie(Movie movie)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(movie);
+            return movie;
         }
 
-        public Task<Screening> CreateScreening(Screening screening)
+        public async Task<Screening> CreateScreening(Screening screening)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(screening);
+            return screening;
         }
 
-        public Task<Ticket> CreateTicket(Ticket ticket)
+        public async Task<Ticket> CreateTicket(Ticket ticket)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(ticket);
+            return ticket;
         }
 
-        public Task Delete(Customer customer)
+        public async Task<Customer> DeleteCustomer(int id)
         {
-            throw new NotImplementedException();
+            var target = await _context.Customers.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Customers.Remove(target);
+            return target;
         }
 
-        public Task DeleteMovie(Movie movie)
+        public async Task<Movie> DeleteMovie(int id)
         {
-            throw new NotImplementedException();
+            var target = await _context.Movies.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Movies.Remove(target);
+            return target;
         }
 
-        public Task<List<Customer>> GetCustomers()
+        public async Task<List<Customer>> GetCustomers()
         {
-            throw new NotImplementedException();
+            return await _context.Customers.ToListAsync();
         }
 
-        public Task<List<Movie>> GetMovies()
+        public async Task<List<Movie>> GetMovies()
         {
-            throw new NotImplementedException();
+
+            return await _context.Movies.ToListAsync();
         }
 
-        public Task<Screening> GetScreenings()
+        public async Task<List<Screening>> GetScreenings()
         {
-            throw new NotImplementedException();
+            return await _context.Screenings.ToListAsync();
         }
 
-        public Task<List<Ticket>> GetTickets()
+        public async Task<List<Ticket>> GetTickets()
         {
-            throw new NotImplementedException();
+            return await _context.Tickets.ToListAsync();
         }
 
-        public Task<Customer> Update(Customer customer)
+        public async Task<Customer> UpdateCustomer(Customer updatedCustomer, int id)
         {
-            throw new NotImplementedException();
+            var customer1 = await _context.Customers.FirstOrDefaultAsync(x => x.Id == id);
+            customer1.Email = updatedCustomer.Email;
+            customer1.Phone = updatedCustomer.Phone;
+            customer1.Name = updatedCustomer.Name;
+            customer1.createdAt = updatedCustomer.createdAt;
+            customer1.updatedAt = updatedCustomer.updatedAt;
+            return customer1;
+
         }
 
-        public Task<Movie> UpdateMovie(Movie movie)
+        public async Task<Movie> UpdateMovie(Movie Updatedmovie, int id)
         {
-            throw new NotImplementedException();
+            var movie = await _context.Movies.FirstOrDefaultAsync(x => x.Id == id);
+            movie.Title = Updatedmovie.Title;
+            movie.Description = Updatedmovie.Description;
+            movie.Rating = Updatedmovie.Rating;
+            movie.runTimeMins = Updatedmovie.runTimeMins;
+            return movie;
         }
     }
 }

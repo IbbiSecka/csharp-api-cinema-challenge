@@ -12,7 +12,7 @@ namespace api_cinema_challenge.Data
                 // Ensure the database exists
                 if (await db.Database.EnsureCreatedAsync())
                 {
-                    // Seed Movies
+                    // Movies
                     if (!db.Movies.Any())
                     {
                         db.Movies.AddRange(
@@ -22,7 +22,7 @@ namespace api_cinema_challenge.Data
                         await db.SaveChangesAsync();
                     }
 
-                    // Seed Screenings
+                    // Screenings
                     if (!db.Screenings.Any())
                     {
                         db.Screenings.AddRange(
@@ -32,17 +32,17 @@ namespace api_cinema_challenge.Data
                         await db.SaveChangesAsync();
                     }
 
-                    // Seed Customers
+                    // Customers
                     if (!db.Customers.Any())
                     {
                         db.Customers.AddRange(
-                            new Customer { Id = 1, Name = "John Doe", Email = "johndoe@example.com", Phone = "123456789", createdAt = DateTime.Now, updatedAt = DateTime.Now },
-                            new Customer { Id = 2, Name = "Jane Smith", Email = "janesmith@example.com", Phone = "987654321", createdAt = DateTime.Now, updatedAt = DateTime.Now }
+                            new Customer { Id = 1, Name = "Ibbi Secka", Email = "123456@123.com", Phone = "123456789", createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                            new Customer { Id = 2, Name = "Lionel Messi", Email = "ibbi@ibbi.com", Phone = "987654321", createdAt = DateTime.Now, updatedAt = DateTime.Now }
                         );
                         await db.SaveChangesAsync();
                     }
 
-                    // Seed Tickets
+                    // Tickets
                     if (!db.Tickets.Any())
                     {
                         db.Tickets.AddRange(
