@@ -8,6 +8,13 @@ namespace api_cinema_challenge.Repository
     public class Repository : IRepository
     {
       private CinemaContext _context;
+        private DbSet<Customer> _customer;
+
+        public Repository(CinemaContext context)
+        {
+            _context = context;
+            _customer = context.Set<Customer>();
+        }
 
         public async Task<Customer> CreateCustomer(Customer customer)
         {
@@ -50,7 +57,7 @@ namespace api_cinema_challenge.Repository
 
         public async Task<List<Customer>> GetCustomers()
         {
-            return await _context.Customers.ToListAsync();
+            return await _customer.ToListAsync();
         }
 
         public async Task<List<Movie>> GetMovies()

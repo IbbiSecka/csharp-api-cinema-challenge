@@ -12,7 +12,7 @@ namespace api_cinema_challenge.Data
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.example.json").Build();
             _connectionString = configuration.GetValue<string>("ConnectionStrings:DefaultConnectionString")!;
-            this.Database.EnsureCreated();
+           
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -46,6 +46,8 @@ namespace api_cinema_challenge.Data
                 .HasMany(x => x.Tickets)
                 .WithOne(x=> x.Customer)
                 .HasForeignKey(x => x.customerId);
+
+            base.OnModelCreating(modelBuilder);
 
 
         }
