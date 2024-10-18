@@ -12,7 +12,7 @@ using api_cinema_challenge.Data;
 namespace api_cinema_challenge.Migrations
 {
     [DbContext(typeof(CinemaContext))]
-    [Migration("20240916084636_InitialCreate")]
+    [Migration("20241018075621_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
