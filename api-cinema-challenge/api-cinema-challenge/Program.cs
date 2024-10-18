@@ -12,9 +12,9 @@ builder.Services.AddScoped<IRepository, Repository>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowS3Bucket", policy =>
+    options.AddPolicy("AllowAllOrigins", policy =>
     {
-        policy.WithOrigins("http://ibbibucket.s3-website.eu-north-1.amazonaws.com/")
+        policy.AllowAnyOrigin() // Allow requests from any origin
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -29,7 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowS3Bucket");
+app.UseCors("AllowAllOrigins"); // Use the new policy
 app.UseHttpsRedirection();
 app.ConfigureCinemaEndpoint();
 app.SeedCinemaDatabase();
