@@ -10,7 +10,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CinemaContext>();
 builder.Services.AddScoped<IRepository, Repository>();
 
-var app = builder.Build();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowS3Bucket", policy =>
@@ -20,6 +19,8 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
