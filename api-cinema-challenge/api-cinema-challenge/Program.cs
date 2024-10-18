@@ -20,7 +20,6 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
-app.UseCors("AllowS3Bucket");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -29,6 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowS3Bucket");
 app.UseHttpsRedirection();
 app.ConfigureCinemaEndpoint();
 app.SeedCinemaDatabase();
