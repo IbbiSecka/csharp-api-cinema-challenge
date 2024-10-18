@@ -11,6 +11,16 @@ builder.Services.AddDbContext<CinemaContext>();
 builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowS3Bucket", policy =>
+    {
+        policy.WithOrigins("http://ibbibucket.s3-website.eu-north-1.amazonaws.com/")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+app.UseCors("AllowS3Bucket");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
